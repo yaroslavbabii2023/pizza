@@ -30,13 +30,15 @@ function Sort() {
                 <span onClick={() => setOpen(!open)}>{sortName}</span>
             </div>
             <div className="sort__popup">
-                {open && <ul>
-                    {list.map((name, i) => (
-                        <li onClick={() => onChangeList(i)}
-                            className={selected === i ? 'active' : ''}
-                            key={i}>{name}</li>
-                    ))}
-                </ul>}
+                {open &&
+                    <ul>
+                        {list.map((name, i) => (
+                            <li onClick={() => onChangeList(i)}
+                                className={selected === i ? 'active' : ''}
+                                key={i}>{name}
+                            </li>
+                        ))}
+                    </ul>}
             </div>
         </div>
     )
