@@ -1,6 +1,6 @@
 import React from "react";
 
-function PizzaBlock ({title, price, imageUrl, sizes, types}) {
+function Index ({title, price, imageUrl, sizes, types}) {
 
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
@@ -51,4 +51,4 @@ function PizzaBlock ({title, price, imageUrl, sizes, types}) {
     )
 }
 
-export default PizzaBlock
+export default Index
