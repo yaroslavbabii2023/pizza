@@ -8,6 +8,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: 645px) {
+      flex-direction: column;
+
+      .header__cart {
+        margin-top: 20px;
+      }
+    }
   }
 
   &__logo {
@@ -20,7 +28,7 @@
     h1 {
       color: #181818;
       font-size: 24px;
-      letter-spacing: 1%;
+      letter-spacing: 1px;
       text-transform: uppercase;
       font-weight: 800;
     }
