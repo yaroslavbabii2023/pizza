@@ -1,14 +1,25 @@
 import React from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addItems} from "../../redux/slices/cartSlice";
 
-function Index ({title, price, imageUrl, sizes, types}) {
+const typeNames = ['тонкое', 'традиционное']
 
+function PizzaBlock({id, title, price, imageUrl, sizes, types}) {
+    const dispatch = useDispatch()
+    const cartItem = useSelector(state => state.cart.items.find(obj => obj.id === id))
+    const addCount = cartItem ? cartItem.count : 0
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
+    const onClickAdd = () => {
+        const item = {
+            id, title, price, imageUrl,
+            type: typeNames[activeType],
+            size: sizes[activeSize],
+        }
+        dispatch(addItems(item))
+    }
 
-
-    const typeNames = ['тонкое', 'традиционное']
-
-    return(
+    return (
         <div className="pizza-block-wrapper">
             <div className="pizza-block">
                 <img
@@ -31,7 +42,7 @@ function Index ({title, price, imageUrl, sizes, types}) {
                 </div>
                 <div className="pizza-block__bottom">
                     <div className="pizza-block__price">{price} ₽</div>
-                    <button className="button button--outline button--add">
+                    <button onClick={onClickAdd} className="button button--outline button--add">
                         <svg
                             width="12"
                             height="12"
@@ -45,7 +56,7 @@ function Index ({title, price, imageUrl, sizes, types}) {
                             />
                         </svg>
                         <span>Добавить</span>
-                        <i>{0}</i>
+                        {addCount > 0 && <i>{addCount}</i>}
                     </button>
                 </div>
             </div>
@@ -53,4 +64,4 @@ function Index ({title, price, imageUrl, sizes, types}) {
     )
 }
 
-export default Index
+export default PizzaBlock
