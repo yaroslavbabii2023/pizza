@@ -30,18 +30,24 @@ const Home = () => {
     const onChangePage = number => {
         dispatch(setCurrentPage(number))
     }
-    const fetchPizzas = () => {
+    const fetchPizzas = async () => {
         setIsLoading(true)
         const order = sortType.includes('-') ? 'asc' : 'desc';
         const sortBy = sortType.replace('-', '')
         const category = categoryId > 0 ? `category=${categoryId}` : ''
         const search = searchValue ? `&search=${searchValue}` : ''
 
-        axios.get(`https://64d26e02f8d60b1743620bc0.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`)
-            .then(response => {
-                setItems(response.data)
-                setIsLoading(false)
-            })
+        try {
+            const res = await axios.get(
+                `https://64d26e02f8d60b1743620bc0.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
+            )
+            setItems(res.data)
+            setIsLoading(false)
+        } catch (error) {
+            console.log('Error', error)
+        } finally {
+            setIsLoading(false)
+        }
 
         window.scrollTo(0, 0)
     }
