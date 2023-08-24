@@ -1,6 +1,4 @@
 import "./scss/app.scss"
-import React from "react";
-
 import NotFound from "./pages/NotFound";
 import {Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
